@@ -2,16 +2,24 @@
 
 import json
 import subprocess
-
+import sys
 
 retCommand = subprocess.run(["i3-msg", "-t", "get_workspaces"], capture_output = True);
 
 parsed_json = json.loads(retCommand.stdout);
 
+if(len(sys.argv) == 1):
+    header = ""
+
+elif(len(sys.argv) == 2):
+    header = str(sys.argv[1]) + " ";
+else:
+    print("bruh")
+
 
 for index in range(len(parsed_json)):
 
     if(parsed_json[index]["focused"] == True):
-        print(parsed_json[index]["num"])
+        print(header + str(parsed_json[index]["num"]))
         break
 
