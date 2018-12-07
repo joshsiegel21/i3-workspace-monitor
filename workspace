@@ -1,0 +1,17 @@
+#!/bin/python
+
+import json
+import subprocess
+
+
+retCommand = subprocess.run(["i3-msg", "-t", "get_workspaces"], capture_output = True);
+
+parsed_json = json.loads(retCommand.stdout);
+
+
+for index in range(len(parsed_json)):
+
+    if(parsed_json[index]["focused"] == True):
+        print(parsed_json[index]["num"])
+        break
+
